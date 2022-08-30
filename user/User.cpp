@@ -1,6 +1,8 @@
 #include "User.h"
 #include "UserOperations.h"
 
+std::uint64_t User::user_count = 0ULL;
+
 User::User(
 	const std::wstring& first_name,
 	const std::wstring& last_name,
@@ -31,8 +33,9 @@ std::shared_ptr<User> User::createUser(
 	return userPtr;
 }
 
-std::uint64_t User::getUserCount() const {
-	return user_count;
+std::uint64_t User::getUserCount() {
+	const auto var = user_count;
+	return var;
 }
 
 std::uint64_t User::getUserId() const {

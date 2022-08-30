@@ -30,7 +30,7 @@ public:
 		const std::shared_ptr<Address>& addressPtr
 	);
 
-	std::uint64_t getUserCount() const;
+	static std::uint64_t getUserCount();
 	std::uint64_t getUserId() const;
 	std::wstring getFirstName() const;
 	std::wstring getLastName() const;

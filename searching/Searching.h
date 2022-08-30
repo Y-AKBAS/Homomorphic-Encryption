@@ -1,6 +1,7 @@
 #pragma once
 
 #include "transporter/ITransporter.h"
+#include "utils/Timer.h"
 
 #include <optional>
 #include <string>
@@ -14,7 +15,7 @@ public:
 	Searching(
 		const std::optional<std::string>& from,
 		const std::optional<std::string>& to,
-		const std::optional<std::shared_ptr<std::tm>>& when,
+		const std::optional<std::shared_ptr<std::tm>>& when = std::make_optional<std::shared_ptr<std::tm>>(utils::Timer::getCurrentTm()),
 		const std::optional<ClimateFriendlinessDegree>& climateFriendlinessDegree = ClimateFriendlinessDegree::VERY_FRIENDLY,
 		const std::optional<TransporterType>& transporterType = TransporterType::UNKNOWN
 	);

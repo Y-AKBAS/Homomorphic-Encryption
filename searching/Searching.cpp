@@ -13,7 +13,7 @@ Searching::Searching(
 ) :
 	from{ from },
 	to{ to },
-	when{ when ? when : std::make_optional<std::shared_ptr<std::tm>>(utils::Timer::getCurrentTm()) },
+	when{ when },
 	climateFriendlinessDegree{ climateFriendlinessDegree },
 	transporterType{ transporterType }
 {

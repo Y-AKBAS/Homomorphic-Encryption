@@ -43,6 +43,8 @@ public:
 		const std::shared_ptr<Address>& addressPtr
 	) const;
 
+	std::shared_ptr<seal::Ciphertext> encryptUserId() const;
+
 private:
 
 	static const std::unique_ptr<const SealOperations> sealOperations;

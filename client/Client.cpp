@@ -41,8 +41,23 @@ std::shared_ptr<BookingResult> Client::onBooking(const std::shared_ptr<SearchRes
 	if (!user && UserOperations::getUser(*user)) {
 		return std::make_shared<BookingResult>();
 	}
-	return std::shared_ptr<BookingResult>();
+
+	return std::make_shared<BookingResult>(
+		BookingResultCode::REDIRECT_TO_PAYMENT,
+		std::nullopt);
 }
+
+std::shared_ptr<seal::Ciphertext> Client::encryptUserId() const {
+
+	if (user) {
+		const auto id = (*user)->getUserId();
+		const auto cipherText = sealOperations->encrypt(id);
+		return std::make_shared<seal::Ciphertext>(*cipherText);
+	}
+
+	return nullptr;
+}
+
 
 std::shared_ptr<BookingResult> Client::book(
 	const std::shared_ptr<seal::Ciphertext>& encrypted_user_id,
@@ -86,6 +101,7 @@ std::optional<std::shared_ptr<PaymentResult>> Client::pay(
 	return std::make_optional<std::shared_ptr<PaymentResult>>(paymentResultPtr);
 }
 
+// TODO: Check if user exists in the db first.
 std::optional<std::shared_ptr<User>> Client::login(
 	const std::wstring& first_name,
 	const std::wstring& last_name,
@@ -104,5 +120,7 @@ std::optional<std::shared_ptr<User>> Client::login(
 
 	return user;
 }
+
+
 
 const std::unique_ptr<const SealOperations> Client::sealOperations = factory::SealEncryptionFactory::createDefaultBfvSchema();
