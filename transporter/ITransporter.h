@@ -25,7 +25,7 @@ enum class TransporterType {
 
 class ITransporter {
 public:
-	virtual ~ITransporter() = 0;
+	virtual ~ITransporter() = default;
 	virtual ClimateFriendlinessDegree getClimateFriendliness() = 0;
 	virtual TransporterType getTransporterType() = 0;
 };

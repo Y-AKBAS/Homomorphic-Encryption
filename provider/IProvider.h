@@ -15,7 +15,7 @@ enum class ProviderType {
 
 class IProvider {
 public:
-	virtual ~IProvider() = 0;
+	virtual ~IProvider() = default;
 	virtual ProviderType getProviderType() const = 0;
 	virtual std::shared_ptr<std::vector<std::shared_ptr<BaseTransporter>>> getTransporters() const = 0;
 };

@@ -4,7 +4,7 @@
 UserOperations::UserOperations() = default;
 UserOperations::~UserOperations() = default;
 
-
+std::map < std::uint64_t, std::shared_ptr<User>> UserOperations::user_map{};
 void UserOperations::addUser(const std::shared_ptr<User>& userPtr) {
 	user_map.insert({ userPtr->getUserId(), userPtr });
 }

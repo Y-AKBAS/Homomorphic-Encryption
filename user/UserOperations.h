@@ -3,6 +3,7 @@
 #include "User.h"
 #include <memory>
 #include <optional>
+#include <map>
 
 class UserOperations {
 private:

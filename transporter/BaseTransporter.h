@@ -3,7 +3,7 @@
 #include "ITransporter.h"
 
 
-class BaseTransporter: public ITransporter {
+class BaseTransporter : public ITransporter {
 
 private:
 	ClimateFriendlinessDegree climateFriendlinessDegree;
@@ -13,7 +13,7 @@ public:
 	BaseTransporter(
 		const ClimateFriendlinessDegree cfDegree = ClimateFriendlinessDegree::UNKNOWN,
 		const TransporterType tType = TransporterType::UNKNOWN);
-	virtual ~BaseTransporter();
+	virtual ~BaseTransporter() override;
 	virtual ClimateFriendlinessDegree getClimateFriendliness() override;
 	virtual TransporterType getTransporterType() override;
 };

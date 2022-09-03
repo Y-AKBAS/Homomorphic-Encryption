@@ -11,6 +11,6 @@ enum class PaymentMethod {
 
 class IPayment {
 public:
-	virtual ~IPayment() = 0;
+	virtual ~IPayment() = default;
 	virtual PaymentMethod getPaymentMethod() const = 0;
 };

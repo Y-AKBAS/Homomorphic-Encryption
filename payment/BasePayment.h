@@ -25,7 +25,7 @@ struct PaymentResult {
 
 class BasePayment : public IPayment {
 public:
-	virtual ~BasePayment();
+	virtual ~BasePayment() override;
 	BasePayment(
 		const std::shared_ptr<Invoicing>& invoicing,
 		const PaymentMethod& paymentMethod = PaymentMethod::UNKNOWN);
