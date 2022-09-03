@@ -8,11 +8,10 @@ add_executable (${PROJECT_NAME} "Main.cpp" "Main.h")
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 set_directory_properties(PROPERTIES LINKER_LANGUAGE CXX)
 
-find_package(SEAL 4.0 REQUIRED)
+include(C:/vcpkg/scripts/buildsystems/vcpkg.cmake)
 
-set(Boost_INCLUDE_DIR C:/MyBoost/include/boost-1_77)
-set(Boost_LIBRARY_DIR C:/MyBoost/lib)
-find_package(Boost 1.77 REQUIRED)
+find_package(SEAL 3.7.2 REQUIRED)
+find_package(Boost 1.80 REQUIRED)
 
 add_subdirectory(transporter)
 add_subdirectory(provider)
