@@ -41,12 +41,12 @@ public:
 		const std::wstring& last_name,
 		const std::wstring& email,
 		const std::shared_ptr<Address>& addressPtr
-	) const;
+	);
 
 	std::shared_ptr<seal::Ciphertext> encryptUserId() const;
 
 private:
-
+	
 	static const std::unique_ptr<const SealOperations> sealOperations;
-	std::optional<std::shared_ptr<User>> user;
+	std::optional<std::shared_ptr<User>> user {};
 };

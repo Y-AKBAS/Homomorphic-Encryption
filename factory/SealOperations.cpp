@@ -35,8 +35,8 @@ std::shared_ptr<seal::Evaluator> SealOperations::getEvalutor() const {
 }
 
 std::uint64_t SealOperations::hex_string_to_uint64(const std::string& str, const std::size_t number_size) const {
-	const char* c_str = str.c_str();
-	std::uint64_t* number;
+ 	const char* c_str = str.c_str();
+	std::uint64_t* number = nullptr;
 	seal::util::hex_string_to_uint(c_str, str.length(), number_size, number);
 	return *number;
 }

@@ -38,7 +38,7 @@ std::optional<std::shared_ptr<std::vector<std::shared_ptr<SearchResult>>>> Clien
 
 std::shared_ptr<BookingResult> Client::onBooking(const std::shared_ptr<SearchResult>& searchResult) const
 {
-	if (!user && UserOperations::getUser(*user)) {
+	if (!user || UserOperations::getUser(*user)) {
 		return std::make_shared<BookingResult>();
 	}
 
@@ -68,7 +68,7 @@ std::shared_ptr<BookingResult> Client::book(
 	const double& price,
 	std::shared_ptr<std::tm>& booked_for_time) const
 {
-	if (!user && UserOperations::getUser(*user)) {
+	if (!user || !UserOperations::getUser(*user)) {
 		return std::make_shared<BookingResult>();
 	}
 
@@ -87,7 +87,7 @@ std::optional<std::shared_ptr<PaymentResult>> Client::pay(
 	const PaymentMethod& paymentMethod) const
 {
 
-	if (paymentMethod == PaymentMethod::UNKNOWN && !user && UserOperations::getUser(*user)) {
+	if (paymentMethod == PaymentMethod::UNKNOWN || !user || !UserOperations::getUser(*user)) {
 		return std::make_optional<std::shared_ptr<PaymentResult>>(
 			std::make_shared<PaymentResult>(PaymentResultCode::FAILED, std::nullopt)
 			);
@@ -96,9 +96,10 @@ std::optional<std::shared_ptr<PaymentResult>> Client::pay(
 	const auto invoicingPtr = std::make_shared<Invoicing>(*user, price);
 	const auto basePaymentPtr = std::make_shared<BasePayment>(invoicingPtr, paymentMethod);
 	const auto paymentResultPtr = std::make_shared<PaymentResult>(
-		PaymentResultCode::SUCCESSFUL, std::make_optional<>(basePaymentPtr));
-
-	return std::make_optional<std::shared_ptr<PaymentResult>>(paymentResultPtr);
+		PaymentResultCode::SUCCESSFUL, std::make_optional<std::shared_ptr<BasePayment>>(basePaymentPtr));
+	
+	const auto payed = std::make_optional<std::shared_ptr<PaymentResult>>(paymentResultPtr);
+	return payed;
 }
 
 // TODO: Check if user exists in the db first.
@@ -106,21 +107,20 @@ std::optional<std::shared_ptr<User>> Client::login(
 	const std::wstring& first_name,
 	const std::wstring& last_name,
 	const std::wstring& email,
-	const std::shared_ptr<Address>& addressPtr) const
+	const std::shared_ptr<Address>& addressPtr)
 {
 	if (!user) {
 		bool isFieldMissing = utils::isEmptyOrNull({ first_name, last_name, email });
-		if (isFieldMissing)
+		if (!isFieldMissing)
 		{
 			return std::nullopt;
 		}
-		return std::make_optional<std::shared_ptr<User>>(
+		user = std::make_optional<std::shared_ptr<User>>(
 			User::createUser(first_name, last_name, email, addressPtr));
 	}
 
 	return user;
 }
-
 
 
 const std::unique_ptr<const SealOperations> Client::sealOperations = factory::SealEncryptionFactory::createDefaultBfvSchema();

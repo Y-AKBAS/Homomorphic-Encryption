@@ -24,9 +24,11 @@ namespace factory {
 		std::unique_ptr<seal::SEALContext> sealContext =
 			std::make_unique<seal::SEALContext>(*enc_params);
 
-		const char* var = sealContext->parameter_error_message();
+		const char* error_message = sealContext->parameter_error_message();
 
-		if (var != "valid") {
+		std::cout << "Error message of context: " << error_message << std::endl;
+
+		if (strcmp(error_message, "valid") != 0) {
 			std::cerr << "Default BFV Enc_Parameters are not valid" << std::endl;
 		}
 

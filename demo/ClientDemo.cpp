@@ -1,6 +1,7 @@
 #include "ClientDemo.h"
 #include "client/Client.h"
 #include <string>
+#include <boost/log/trivial.hpp>
 
 namespace demo {
 
@@ -33,7 +34,7 @@ namespace demo {
 
 				const std::optional<std::shared_ptr<User>> user = client->login(firstName, lastName, email,
 					std::make_shared<Address>(street, house_number, postal_code, city, country));
-
+				
 				if (user) {
 					std::wcout << "User: "
 						<< user.value()->getFirstName()
@@ -56,15 +57,16 @@ namespace demo {
 						transporter,
 						from,
 						to,
-						9.0
+						price
 					);
 
+					/*std::optional<std::shared_ptr<PaymentResult>> paymentResult{};
 					if (bookingResultPtr->resultCode == BookingResultCode::BOOKING_SUCCESSFULL) {
-						client->pay(price, PaymentMethod::PAYPAL);
-					}
-
+						paymentResult = client->pay(price, PaymentMethod::PAYPAL);
+					}*/
+					std::cout << "Came here";
 				}
-
+				std::cout << "Came also here";
 			}
 		}
 		else {

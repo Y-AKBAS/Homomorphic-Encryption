@@ -11,7 +11,7 @@ private:
 public:
 
 	Invoicing(
-		const std::shared_ptr<User> user,
+		const std::shared_ptr<User>& user,
 		const double& price
 	);
 

@@ -23,7 +23,7 @@ namespace demo {
 
 		const std::unique_ptr<seal::Plaintext> decryptedPlaintext = sealOperations->decrypt(*cipherText);
 		std::uint64_t squared_number = sealOperations->hex_string_to_uint64(
-			decryptedPlaintext->to_string(), std::size_t(2));
+			decryptedPlaintext->to_string(), std::size_t(1));
 		std::cout << "Decrypted text after square: " << squared_number << std::endl;
 	}
 }

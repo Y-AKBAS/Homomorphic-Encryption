@@ -2,13 +2,12 @@
 cmake_minimum_required (VERSION 3.8)
 
 project ("Thesis" CXX)
+include(C:/vcpkg/scripts/buildsystems/vcpkg.cmake)
 
 add_executable (${PROJECT_NAME} "Main.cpp" "Main.h")
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 set_directory_properties(PROPERTIES LINKER_LANGUAGE CXX)
-
-include(C:/vcpkg/scripts/buildsystems/vcpkg.cmake)
 
 find_package(SEAL 3.7.2 REQUIRED)
 find_package(Boost 1.80 REQUIRED)
