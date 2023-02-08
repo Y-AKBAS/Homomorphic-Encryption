@@ -9,7 +9,7 @@ add_executable (${PROJECT_NAME} "Main.cpp" "Main.h")
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 set_directory_properties(PROPERTIES LINKER_LANGUAGE CXX)
 
-find_package(SEAL 3.7.2 REQUIRED)
+find_package(SEAL 4.0.0 REQUIRED)
 find_package(Boost 1.80 REQUIRED)
 
 add_subdirectory(transporter)
@@ -23,7 +23,7 @@ add_subdirectory(utils)
 add_subdirectory(client)
 add_subdirectory(demo)
 
-target_link_directories(${PROJECT_NAME} PUBLIC ${Boost_LIBRARY_DIR} utils transporter factory provider user searching booking payment client demo )
+target_link_directories(${PROJECT_NAME} PUBLIC ${Boost_LIBRARY_DIRS} utils transporter factory provider user searching booking payment client demo )
 target_include_directories(${PROJECT_NAME} PUBLIC ${Boost_INCLUDE_DIR} utils transporter factory provider user searching booking payment client demo)
 target_link_libraries(${PROJECT_NAME} SEAL::seal Boost::boost utils transporter factory provider user searching booking payment client demo)
 

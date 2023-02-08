@@ -41,9 +41,7 @@ namespace utils {
 
 		std::shared_ptr<std::tm> time_manager = std::make_shared<std::tm>();
 		const clk::time_point now = clk::now();
-		const std::time_t tt = clk::to_time_t(now);
 
-		time_manager.reset(std::localtime(&tt));
 		return time_manager;
 	}
 

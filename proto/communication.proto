@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package Thesis;
+
+service CommunicationService {
+	rpc getMessage(MessageReq) returns (MessageResp);
+}
+
+message MessageReq{
+	string request = 1;
+	repeated bytes myCipher = 2;
+	repeated string stringList = 3;
+}
+
+message MessageResp{
+	string response = 1;
+}
